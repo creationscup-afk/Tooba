@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajeel & Aleena — Wedding Invitation</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@100;300;400&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <style>
+        :root {
+            --gold: #b38b59;
+            --bg: #fcfcfc;
+            --text: #1a1a1a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Cormorant Garamond', serif;
+            overflow-x: hidden;
+        }
+
+        /* Opening Overlay (Curtain Effect) */
+        #overlay {
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .enter-btn {
+            padding: 15px 40px;
+            border: 1px solid var(--gold);
+            background: none;
+            color: var(--gold);
+            cursor: pointer;
+            letter-spacing: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            transition: 0.4s;
+        }
+
+        .enter-btn:hover { background: var(--gold); color: white; }
+
+        /* Hero Section */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 300;
+            margin: 10px 0;
+            line-height: 1;
+        }
+
+        .couple-names {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* Countdown Grid */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 500px;
+            width: 100%;
+            margin: 50px 0;
+        }
+
+        .timer-item span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+
+        .timer-item label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            color: var(--gold);
+        }
+
+        /* Content Card */
+        .event-card {
+            background: white;
+            border: 1px solid #f0f0f0;
+            padding: 80px 40px;
+            max-width: 700px;
+            width: 90%;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.02);
+            position: relative;
+        }
+
+        .event-card::after {
+            content: "";
+            position: absolute;
+            inset: 15px;
+            border: 1px solid rgba(179, 139, 89, 0.15);
+            pointer-events: none;
+        }
+
+        .venue-title {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .date-box {
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+            margin: 30px 0;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        footer {
+            padding: 60px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            opacity: 0.6;
+        }
+
+        /* Smooth Hide Class */
+        .hide-overlay { transform: translateY(-100%); }
+    </style>
+</head>
+<body>
+
+    <div id="overlay">
+        <p class="label" style="margin-bottom: 40px;">Sajeel & Aleena</p>
+        <button class="enter-btn" onclick="startInvite()">OPEN INVITATION</button>
+    </div>
+
+    <section class="section">
+        <p class="label">The Walima Ceremony of</p>
+        <h1 class="reveal">S & A</h1>
+        <p class="couple-names reveal">Sajeel Wasti & Aleena Ammad</p>
+        <div class="date-box reveal">
+            SATURDAY • 4TH APRIL 2026
+        </div>
+        <p class="reveal">7-PM • Multan Garrison Mess Banquet</p>
+    </section>
+
+    <section class="section" style="background: #fff;">
+        <p class="label">Counting Down to Forever</p>
+        <div class="timer-grid reveal">
+            <div class="timer-item"><span id="days">00</span><label>Days</label></div>
+            <div class="timer-item"><span id="hours">00</span><label>Hours</label></div>
+            <div class="timer-item"><span id="mins">00</span><label>Mins</label></div>
+            <div class="timer-item"><span id="secs">00</span><label>Secs</label></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="event-card reveal">
+            <p class="label">The Occasion</p>
+            <div class="venue-title">Evening Reception</div>
+            <p>We look forward to celebrating this joyous occasion with you.</p>
+            <div class="date-box">
+                Multan Garrison Mess Banquet Hall
+            </div>
+            <p style="font-size: 0.9rem; letter-spacing: 1px;">Multan Cantonment, Pakistan</p>
+        </div>
+    </section>
+
+    <footer class="reveal">
+        #SAJEELWEDDSALEENA <br><br>
+        WITH LOVE FROM BOTH FAMILIES
+    </footer>
+
+    <script>
+        // Opening Curtain Function
+        function startInvite() {
+            document.getElementById('overlay').classList.add('hide-overlay');
+        }
+
+        // Scroll Reveal Animations
+        ScrollReveal().reveal('.reveal', {
+            distance: '60px',
+            duration: 1200,
+            easing: 'cubic-bezier(0.5, 0, 0, 1)',
+            interval: 200,
+            origin: 'bottom'
+        });
+
+        // Precision Countdown
+        const targetDate = new Date("April 4, 2026 19:00:00").getTime();
+        
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = d < 10 ? '0'+d : d;
+            document.getElementById('hours').innerText = h < 10 ? '0'+h : h;
+            document.getElementById('mins').innerText = m < 10 ? '0'+m : m;
+            document.getElementById('secs').innerText = s < 10 ? '0'+s : s;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
